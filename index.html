@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neuron License Keygen</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: system-ui, sans-serif;
+        }
+        body {
+            max-width: 720px;
+            margin: 40px auto;
+            padding: 0 20px;
+            background: #1e1e1e;
+            color: #eee;
+        }
+        .container {
+            background:#2d2d2d;
+            padding:24px;
+            border-radius:8px;
+        }
+        textarea {
+            width:100%;
+            background:#111;
+            color:#fff;
+            border:1px solid #555;
+            padding:10px;
+            border-radius:4px;
+            font-size:14px;
+            min-height:100px;
+        }
+        button {
+            background:#007acc;
+            color:white;
+            border:none;
+            padding:10px 20px;
+            border-radius:4px;
+            cursor:pointer;
+            margin:8px 0;
+            font-size:14px;
+        }
+        button:hover {
+            background:#0098ff;
+        }
+        button:disabled {
+            background:#555;
+            cursor:not-allowed;
+        }
+        .success { color:#4cd964; }
+        .error { color:#ff4545; }
+        pre {
+            background:#111;
+            padding:12px;
+            overflow-x:auto;
+            border:1px solid #444;
+            border-radius:4px;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Neuron License Keygen</h2>
+    <p class="error">⚠️ 警告：内置完整RSA私钥，仅用于内部测试，禁止对外公开部署！</p>
+
+    <div>
+        <label>机器码 MachineCode：</label>
+        <textarea id="txtMachineCode" placeholder="粘贴客户端导出的机器码"></textarea>
+    </div>
+
+    <button id="btnGenerate">生成License</button>
+    <div id="msgBox"></div>
+
+    <div>
+        <h4>输出Base64签名：</h4>
+        <pre id="outResult"></pre>
+    </div>
+
+    <button id="btnDownload" disabled>下载 license.dat</button>
+</div>
+
+<!-- BootCDN完整库 11.1.3 -->
+<script src="https://cdn.bootcdn.net/ajax/libs/jsrsasign/11.1.3/jsrsasign-all-min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // 你的RSA XML私钥
+    const PrivateKeyXml = `<RSAKeyValue><Modulus>65DpdTq9sDz3CltqccilQcOliqrNbnw7k9upnS2VntwP4qtt3j5LpYy+a5OLQQsF5RKtmcCT93Qgi24loyFRiUyb27S5toVs+mcvRPfKnPs0eLv116FfwuzZNTC30s+7KlGi2TWGKuALNKij/onW87itAWVqo00pUzQ917zpaMQdphwC0BXrEPLTvFn6ETZ2SguOYHkxK7MqkEf/K+ysEM8QLQCoxuTpYYebT+ztmeyiTHKvSqKsN1Oe2Z1HREtaqZ4dSnNvo15/Jh0nLmT865sL7q4B4/hNGRw/JDPraW/XmAsd07wDykqYeANsrIoWCrdHvNPF/HbAnsZA7D6nHQ==</Modulus><Exponent>AQAB</Exponent><P>/mJpBvRaNOE+RzqAbeh2EKt5S7GrSZGfkLqBmAvt3qN3KPdnRHw72mTtSn4NoAwRMZYx03j8vABkfxx5K78iu87tuWny6R+RLAGE7nv03Zh6tw7IfTzW4PHGsaIGKshI8n8/HleXi2RWOVom7skL1Y2il1nrnIqoZXa1aIsoUOs=</P><Q>7Q/n7FQnuM7496lLcdZG6k9BsjKut8i0Y1NJ6aFkK86yoc9M7u7FVNv7qAAmc/6yWrn/LhOpki9FccDkkEFpVuj0PJVYfS1Pn1Af3QTI9Ei51iJ5Qs7lLFEE6ZIaWImkJCfzyTIvPzbQRms518igWCdkvgxCL9l6bYzB8PO1phc=</Q><DP>IvQItGDs6Cku8oCSVwfC+UVmdEUkYQZ2Y1+NIQQ6mgXiAKoF8X4Uh0yo4jxxyNT/o82caQ9NwtNW+7RA3gb0UdP8DCcHroqc2uwWhOJZYf1qly6b08GBUQVHpO67ZDOC+ncLiDLG6utNgbHmeZb8XkqI1b0QR8ExpEdsY8IDNyM=</DP><DQ>JQai9qp+OcM555Stj+4jzVzrqeV4nIPgiNLtbGwktSLni5ZRMdBhScvCFo9PcjaJrNn4HT488fQoKIg0KsPMrCJeY0gANizpjrx4/ZBNwrnJLMTdo62k5bMRzVlgfAujc3I6BWatMnZhOV5t/mH7iUk91uEbRVX2ZT3i3Ltz16k=</DQ><InverseQ>WVmihIfYLeCpOL9bERHx6fOiMg5UWx+ADZ27VE7N9SwS1znRc6PIASwExiPZr/w5+40VU7qJeX6cjiTHk8LMkjbeVZyeTEPmGtwVQNp305qGSQ2Yl8vZzOQ/5pj51KR5+2OzCw0DT7FR0vXTpa/5z/5rb6D3vX8hyGWCyQYDwts=</InverseQ><D>fyqMjSd3zVMr/aBZ9zDc3YKztAb+vX09YFV93AcGtWqQ/MmUlxxEFAvFpCdTTnqX5RDPPKg0eKptAzgkA0tyS89aeCG4+6pNqWPYpb+q1lHaAq9dSNmp632WyFsTcS+JF5BYfC+jzTODeRrs5PUeYBW693z7M0rtWyhhljw6OL5VAZbGPGeMqhK5iKo11X4VLj0MsqTXWIywzYJM8PKi+xS3QUFXPZLTINblxcmnUNxaLQJ7u4soa7SS4xCeqqTxPrNW9wCXAeT8FmAfBcCvwH6SPsnZRdVIlPaVeX3QfJiudZYSwJwsEaHH329kgi53RQKlrVcORchRBb1zu50tlQ==</D></RSAKeyValue>`;
+
+    let outputBase64 = "";
+
+    const txtMachineCode = document.getElementById("txtMachineCode");
+    const btnGenerate = document.getElementById("btnGenerate");
+    const btnDownload = document.getElementById("btnDownload");
+    const msgBox = document.getElementById("msgBox");
+    const outResult = document.getElementById("outResult");
+
+    btnGenerate.onclick = function () {
+        msgBox.innerHTML = "";
+        outputBase64 = "";
+        btnDownload.disabled = true;
+        outResult.innerText = "";
+
+        const machineCode = txtMachineCode.value.trim();
+        if (!machineCode) {
+            msgBox.innerHTML = `<p class="error">请输入机器码！</p>`;
+            return;
+        }
+
+        try {
+            const key = KEYUTIL.getKey(PrivateKeyXml);
+            // jsrsasign 11.x 签名API
+            const sigHex = KJUR.crypto.Signature.doSign("sha256", machineCode, key);
+            outputBase64 = hex2b64(sigHex);
+
+            outResult.innerText = outputBase64;
+            msgBox.innerHTML = `<p class="success">✅签名成功</p>`;
+            btnDownload.disabled = false;
+        } catch (err) {
+            msgBox.innerHTML = `<p class="error">❌失败：${err.message}</p>`;
+            console.error(err);
+        }
+    };
+
+    btnDownload.onclick = function () {
+        const blob = new Blob([outputBase64], { type: "text/plain" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "license.dat";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+    };
+});
+</script>
+</body>
+</html>
